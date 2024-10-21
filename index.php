@@ -1,57 +1,15 @@
 <?php
-$produtosCafe = [
-        [
-            'nome' => "Café Cremoso",
-            'descricao' => "Café cremoso irresistivelmente suave e que envolve seu paladar",
-            'preco' => "5.00",
-            'imagem' => "img/cafe-cremoso.jpg"
-        ],
-        [
-            'nome' => "Café com Leite",
-            'descricao' => "A harmonia do café e do leite, uma experiência reconfortante",
-            'preco' => "2.00",
-            'imagem' => "img/cafe-com-leite.jpg"
-        ],
-        [
-            'nome' => "Cappuccino",
-            'descricao' => "Café suave, leite cremoso e uma pitada de sabor adocicado",
-            'preco' => "7.00",
-            'imagem' => "img/cappuccino.jpg"
-        ],
-        [
-            'nome' => "Café Gelado",
-            'descricao' => "Café gelado refrescante, adoçado e com notas sutis de baunilha ou caramelo.",
-            'preco' => "3.00",
-            'imagem' => "img/cafe-gelado.jpg"
-        ],
-];
 
-$produtosAlmoco = [
-        [
-            'nome' => "Bife",
-            'descricao' => "Bife, arroz com feijão e uma deliciosa batata frita.",
-            'preco' => "27.90",
-            'imagem' => "img/bife.jpg"
-        ],
-        [
-            'nome' => "Filé de peixe",
-            'descricao' => "Filé de peixe salmão assado, arroz, feijão verde e tomate.",
-            'preco' => "24.99",
-            'imagem' => "img/prato-peixe.jpg"
-        ],
-        [
-            'nome' => "Frango",
-            'descricao' => "Saboroso frango à milanesa com batatas fritas, salada de repolho e molho picante.",
-            'preco' => "23.00",
-            'imagem' => "img/prato-frango.jpg"
-        ],
-        [
-            'nome' => "Fettuccine",
-            'descricao' => "Prato italiano autêntico da massa do fettuccine com peito de frango grelhado",
-            'preco' => "22.50",
-            'imagem' => "img/fettuccine.jpg"
-        ],
-];
+require 'src/conexao-banco.php';
+$squery1 = 'SELECT * FROM produtos WHERE tipo = "Café" ORDER BY preco';
+$statement=$pdo->query($squery1);
+$produtosCafe = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$squery2 = 'SELECT * FROM produtos WHERE tipo = "Almoço" ORDER BY preco';
+$statement=$pdo->query($squery2);
+$produtosAlmoco = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!doctype html>
@@ -87,7 +45,7 @@ $produtosAlmoco = [
                 <?php foreach ($produtosCafe as $produtos): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src= "<?php echo $produtos['imagem'] ?>">
+                        <img src= "<?php echo "img/" . $produtos['imagem'] ?>">
                     </div>
                     <p><?php echo $produtos['nome'] ?></p>
                     <p><?php echo $produtos['descricao'] ?></p>
@@ -105,7 +63,7 @@ $produtosAlmoco = [
                 <?php foreach ($produtosAlmoco as $almoco): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?php echo $almoco['imagem']  ?>">
+                        <img src="<?php echo "img/".$almoco['imagem']  ?>">
                     </div>
                     <p><?php echo $almoco['nome']  ?></p>
                     <p><?php echo $almoco['descricao']  ?></p>
