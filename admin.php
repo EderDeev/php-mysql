@@ -1,3 +1,15 @@
+<?php
+    require 'src/conexao-banco.php';
+    require 'src/Modelo/Produto.php';
+    require 'src/Repositorio/ProdutoRepositorio.php';
+
+    $repositorio = new ProdutoRepositorio($pdo);
+    $todosOsItens = $repositorio->obterTodosProdutos();
+
+
+?>
+
+
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -27,6 +39,7 @@
   <section class="container-table">
     <table>
       <thead>
+
         <tr>
           <th>Produto</th>
           <th>Tipo</th>
@@ -34,45 +47,25 @@
           <th>Valor</th>
           <th colspan="2">Ação</th>
         </tr>
+
       </thead>
       <tbody>
+      <?php foreach ($todosOsItens as $itens): ?>
       <tr>
-        <td>Bife</td>
-        <td>Almoço</td>
-        <td>Delicioso prato</td>
-        <td>R$ 25.00</td>
+        <td><?php echo $itens->getNome() ?> </td>
+        <td><?php echo $itens->getTipo() ?></td>
+        <td><?php echo $itens->getDescricao() ?></td>
+        <td><?php echo $itens->getPrecoFormated() ?></td>
         <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
         <td>
-          <form>
-            <input type="button" class="botao-excluir" value="Excluir">
-          </form>
-        </td>
-        
-      </tr>
-      <tr>
-        <td>Frango</td>
-        <td>Almoço</td>
-        <td>Delicioso prato</td>
-        <td>R$ 25.00</td>
-        <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
-        <td>
-          <form>
-            <input type="button" class="botao-excluir" value="Excluir">
+          <form action="excluir-produto.php">
+              <input type="hidden" name="id" value="<?= $itens->getId() ?>">
+              <input type="submit" class="botao-excluir" value="Excluir">
           </form>
         </td>
       </tr>
-      <tr>
-        <td>Café Gelado</td>
-        <td>Café</td>
-        <td>Delicioso prato</td>
-        <td>R$ 25.00</td>
-        <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
-        <td>
-          <form>
-            <input type="button" class="botao-excluir" value="Excluir">
-          </form>
-        </td>
-      </tr>
+      <?php endforeach; ?>
+
       </tbody>
     </table>
   <a class="botao-cadastrar" href="cadastrar-produto.html">Cadastrar produto</a>
