@@ -56,7 +56,7 @@
         <td><?php echo $itens->getTipo() ?></td>
         <td><?php echo $itens->getDescricao() ?></td>
         <td><?php echo $itens->getPrecoFormated() ?></td>
-        <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
+        <td><a class="botao-editar" href="editar-produto.php?id=<?=$itens->getId()?>">Editar<a/></td>
         <td>
           <form action="excluir-produto.php" method="post">
               <input type="hidden" name="id" value="<?= $itens->getId() ?>">
