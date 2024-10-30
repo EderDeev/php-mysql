@@ -46,7 +46,7 @@ $dadosAlmoco = $produtoAlmoco->obterProdutoAlmoco();
                 <?php foreach ($dadosCafe as $produtos): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src= "<?php echo  $produtos->getImagem()?>">
+                        <img src= "<?php echo  $produtos->getImagemDiretorio()?>">
                     </div>
                     <p><?php echo $produtos->getNome() ?></p>
                     <p><?php echo $produtos->getDescricao() ?></p>
@@ -64,7 +64,7 @@ $dadosAlmoco = $produtoAlmoco->obterProdutoAlmoco();
                 <?php foreach ($dadosAlmoco as $almoco): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?php echo $almoco->getImagem()  ?>">
+                        <img src="<?php echo $almoco->getImagemDiretorio() ?>">
                     </div>
                     <p><?php echo $almoco->getNome()  ?></p>
                     <p><?php echo $almoco->getDescricao()  ?></p>

@@ -47,8 +47,20 @@ class Produto
 
     public function getImagem(): string
     {
+        return  $this->imagem;
+    }
+
+    public function getImagemDiretorio(): string
+    {
         return  "img/" . $this->imagem;
     }
+
+    public function setImagem(string $imagem): void
+    {
+        $this->imagem = $imagem;
+    }
+
+
 
     public function getPrecoFormated():string
     {

@@ -12,15 +12,17 @@
             $_POST['preco'],
         );
 
+
+        if(isset($_FILES['imagem'])) {
+            $produto->setImagem(uniqid() . $_FILES['imagem']['name']);
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $produto->getImagemDiretorio());
+        }
+
         $produtoRepositorio = new ProdutoRepositorio($pdo);
         $produtoRepositorio->salvar($produto);
 
-
         header('Location: admin.php');
-
-
-        }
-
+    }
 
 ?>
 
@@ -51,7 +53,7 @@
     </section>
     <section class="container-form">
         <! caso não tenha o action ele envia a requisão para o proprio arquivo ->
-        <form  method="post">
+        <form  method="post" enctype="multipart/form-data">
 
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
